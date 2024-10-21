@@ -14,29 +14,29 @@ class Kendaraan {
 }
 
 // Kelas turunan yang mengimplementasikan metode abstrak
-class Mobil extends Kendaraan {
+class Pesawat extends Kendaraan {
     constructor() {
-        super('Mobil');
+        super('Pesawat');
     }
 
-    bergerak() {
-        console.log(`${this.jenis} bergerak dengan roda.`);
+    terbang() {
+        console.log(`${this.jenis} terbang di udara.`);
     }
 }
 
-class Kapal extends Kendaraan {
+class Sepeda extends Kendaraan {
     constructor() {
-        super('Kapal');
+        super('Sepeda');
     }
 
     bergerak() {
-        console.log(`${this.jenis} bergerak di atas air.`);
+        console.log(`${this.jenis} bergerak di darat.`);
     }
 }
 
 // Penggunaan
-const mobil = new Mobil();
-mobil.bergerak(); // Output: Mobil bergerak dengan roda.
+const pesawat = new Pesawat();
+pesawat.terbang(); // Output: Pesawat terbang di udara.
 
-const kapal = new Kapal();
-kapal.bergerak(); // Output: Kapal bergerak di atas air.
+const sepeda = new Sepeda();
+sepeda.bergerak(); // Output: Sepeda bergerak di darat.
