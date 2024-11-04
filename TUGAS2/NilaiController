@@ -1,0 +1,54 @@
+// Model: Nilai
+class Nilai {
+    constructor(nilai) {
+        if (!Array.isArray(nilai) || nilai.length === 0) {
+            throw new Error("Data nilai tidak valid atau kosong.");
+        }
+        this.nilai = nilai;
+    }
+
+    hitungRataRata() {
+        const total = this.nilai.reduce((acc, val) => acc + val, 0);
+        return total / this.nilai.length;
+    }
+}
+
+// View: NilaiView
+class NilaiView {
+    render(rataRata) {
+        return `Rata-rata nilai adalah: ${rataRata}`;
+    }
+
+    renderError(message) {
+        return `Kesalahan: ${message}`;
+    }
+}
+
+// Controller: NilaiController
+class NilaiController {
+    constructor(modelInstance, viewInstance) {
+        this.model = modelInstance;
+        this.view = viewInstance;
+    }
+
+    tampilkanRataRata(nilai) {
+        try {
+            const modelNilai = new this.model(nilai);
+            const rataRata = modelNilai.hitungRataRata();
+            console.log(this.view.render(rataRata)); // Menampilkan hasil rata-rata
+        } catch (error) {
+            console.log(this.view.renderError(error.message)); // Menampilkan pesan error
+        }
+    }
+}
+
+// Inisialisasi dan Penggunaan
+const nilaiModel = Nilai; // Menggunakan kelas Nilai sebagai model
+const nilaiView = new NilaiView(); // Membuat instance NilaiView
+const nilaiController = new NilaiController(nilaiModel, nilaiView);
+
+console.log("Tes input valid:");
+nilaiController.tampilkanRataRata([80, 90, 100]); // Menampilkan rata-rata
+
+console.log("Tes input kosong:");
+nilaiController.tampilkanRataRata([]);            // Menampilkan error
